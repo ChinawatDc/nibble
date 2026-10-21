@@ -36,28 +36,16 @@ mkdir -p .agents/skills/nibble && cp -R nibble/SKILL.md nibble/modes .agents/ski
 
 Set `NIBBLE_DEBUG=1` to print the active mode tag.
 
-## Results (preliminary, from an earlier version)
+## Benchmark
 
-> ⚠️ **v0.2.0 (this repo) has not been benchmarked yet.** The numbers below were measured on a pre-edit v0.1 that was not preserved (no copy, no sha). `SKILL.md` and `modes/chat.md` were edited after the benchmark, and `modes/code.md` / `modes/docs.md` were edited mid-run, so some runs may have used different mode versions. v0.2.0 awaits a new, harder, locked test set.
+**Pending.** v0.2.0 will be measured on a new locked test set, with the skill sha locked before running. An earlier pilot run exists in [`bench/RESULTS.md`](./bench/RESULTS.md) but is not citable.
 
-Median total tokens per task, without skill → with nibble. 15 synthetic tasks, n=3 per task per arm (90 runs), graded blind by QA.
-
-| Mode | Without | With nibble | Change | Notes |
-|---|---:|---:|---:|---|
-| Code | 76,915 | 42,632 | **−44.6%** | lower on all 5 tasks |
-| Docs | 45,992 | 30,891 | **−32.8%** | multi-section tasks went up: d04 +7.6%, d05 +18.5% |
-| Chat ⚠️ | 29,695 | 43,508 | **+46.5%** | higher on 4/5 tasks, high variance (h01: 34k–122k); only h03 −17% |
-
-**Quality:** all 90 runs passed graded checks with and without the skill. The test set was too easy to show quality gains or to measure precision/recall.
-
-> **Chat mode is experimental and not recommended yet** — it increased tokens in this run.
+> **Chat mode is experimental and not recommended yet.**
 
 ## Limitations
 
-- One model as reported by the runner (Gemini 3.8 Flash (Medium) via agy); model and agy version were not verifiable from the output.
-- Small, synthetic, easy test set; n=3. These are internal, preliminary numbers — not a benchmark claim.
-- The skill was written before the test set was locked. See [`bench/RESULTS.md`](./bench/RESULTS.md) for all caveats.
-- The results describe pre-edit v0.1, not the files in this repo. v0.2.0 will be measured on a new, harder, locked test set.
+- v0.2.0 is untested; there are no citable benchmark numbers yet.
+- Chat mode is experimental.
 
 ## Contributing
 

@@ -1,4 +1,7 @@
-# nibble benchmark results (preliminary, pre-edit v0.1)
+# nibble PILOT run — NOT citable
+
+> 🚫 **PILOT run, NOT citable.** The `modes/code.md` and `modes/docs.md` files changed mid-run, the benchmarked files were not preserved, and the run cannot be re-run. Do not quote these numbers. Kept for transparency only.
+
 
 > ⚠️ These numbers were measured on a **pre-edit v0.1 that was not preserved** (no copy, no sha) — **not** the v0.2.0 files in this repo. v0.2.0 has not been benchmarked yet and awaits a new, harder, locked test set.
 
@@ -15,7 +18,7 @@
 - **Model:** as reported by the runner, Gemini 3.8 Flash (Medium) via agy. **Model and agy version are NOT verifiable** — neither appears in the JSON output.
 - **Grading:** blind (QA did not know which runs used the skill), by QA Bot against locked answers.
 
-## Results — median total tokens
+## Pilot numbers (NOT citable) — median total tokens
 
 | Mode | Without | With nibble | Change | Notes |
 |---|---:|---:|---:|---|
