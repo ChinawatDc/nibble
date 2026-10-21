@@ -1,0 +1,1 @@
+Read transcript.txt. Summarise the current state of the decisions it covers and state the single next step and its owner.

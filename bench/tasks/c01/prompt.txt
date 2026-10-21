@@ -1,0 +1,1 @@
+An order totalling exactly 1000 THB is not getting the 5% discount, but the spec says orders of 1000 THB or more should. tests/test_discount.py fails. Find why. Answer with the file path, the line number, and the one-line fix.

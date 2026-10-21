@@ -1,0 +1,5 @@
+env: production
+logging: info
+env_vars:
+  APP_MAX_UPLOAD_MB: "50"
+  APP_WORKERS: "8"
