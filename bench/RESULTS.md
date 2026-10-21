@@ -1,7 +1,11 @@
-# nibble v0.1 — benchmark results (preliminary)
+# nibble benchmark results (preliminary, pre-edit v0.1)
+
+> ⚠️ These numbers were measured on a **pre-edit v0.1 that was not preserved** (no copy, no sha) — **not** the v0.2.0 files in this repo. v0.2.0 has not been benchmarked yet and awaits a new, harder, locked test set.
 
 ## Setup
-- **Skill measured:** v0.1 with chat mode enabled, exactly the files in this repo.
+- **Skill measured:** pre-edit v0.1 with chat mode enabled. Not preserved; no sha available.
+  - Timeline (Asia/Bangkok, UTC+7): runs 15:09–15:59; `modes/code.md` and `modes/docs.md` edited at 15:33 **during** the run, so some runs may have used different mode versions; `SKILL.md` and `modes/chat.md` edited at 16:22, **after** the run.
+- **Shipped v0.2.0 file hashes (sha256, NOT the benchmarked version):**
   - `SKILL.md` sha256 `9d6912d6ff850effd08c870f1b7474e17392d231cea344035d12ffeb75ea9c39`
   - `modes/code.md` sha256 `86ab6de1c310f8ad2362ccec4fef63ca60fcbf2ddf2bcc355412ca12f2cfbfaa`
   - `modes/docs.md` sha256 `f4429bf1ce16aac4fffc55bbc99d3f73525c0c367753dc95a6294626cfa92c62`
@@ -24,5 +28,5 @@
 ## Caveats
 - Runs used `--dangerously-skip-permissions` (against the intended protocol; synthetic data in a sandbox).
 - The skill was written **before** the test set was locked. QA did not open the skill while building the tests.
-- This task set has now been seen; it must not be reused to validate v0.2. v0.2 will use a new, harder, locked set.
+- This task set has now been seen; it must not be reused to validate v0.2.0. v0.2.0 will use a new, harder, locked set.
 - Preliminary and internal. Not a benchmark claim.

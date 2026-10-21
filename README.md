@@ -2,7 +2,7 @@
 
 **Read less, answer just as well.** A context-discipline skill for AI coding agents.
 
-![License: MIT](https://img.shields.io/badge/license-MIT-blue) ![Version](https://img.shields.io/badge/version-v0.1-informational) ![Status](https://img.shields.io/badge/status-preliminary-orange)
+![License: MIT](https://img.shields.io/badge/license-MIT-blue) ![Version](https://img.shields.io/badge/version-v0.2.0-informational) ![Status](https://img.shields.io/badge/status-untested-lightgrey)
 
 🇹🇭 [สรุปภาษาไทย](./README.th.md) · 📊 [Full results](./bench/RESULTS.md)
 
@@ -36,7 +36,9 @@ mkdir -p .agents/skills/nibble && cp -R nibble/SKILL.md nibble/modes .agents/ski
 
 Set `NIBBLE_DEBUG=1` to print the active mode tag.
 
-## Results (preliminary)
+## Results (preliminary, from an earlier version)
+
+> ⚠️ **v0.2.0 (this repo) has not been benchmarked yet.** The numbers below were measured on a pre-edit v0.1 that was not preserved (no copy, no sha). `SKILL.md` and `modes/chat.md` were edited after the benchmark, and `modes/code.md` / `modes/docs.md` were edited mid-run, so some runs may have used different mode versions. v0.2.0 awaits a new, harder, locked test set.
 
 Median total tokens per task, without skill → with nibble. 15 synthetic tasks, n=3 per task per arm (90 runs), graded blind by QA.
 
@@ -55,7 +57,7 @@ Median total tokens per task, without skill → with nibble. 15 synthetic tasks,
 - One model as reported by the runner (Gemini 3.8 Flash (Medium) via agy); model and agy version were not verifiable from the output.
 - Small, synthetic, easy test set; n=3. These are internal, preliminary numbers — not a benchmark claim.
 - The skill was written before the test set was locked. See [`bench/RESULTS.md`](./bench/RESULTS.md) for all caveats.
-- v0.2 will be measured on a new, harder, locked test set.
+- The results describe pre-edit v0.1, not the files in this repo. v0.2.0 will be measured on a new, harder, locked test set.
 
 ## Contributing
 
