@@ -2,8 +2,11 @@
 
 Specialized guidelines for managing context bloat across long-running or multi-topic conversations.
 
+## 0. Short-Thread Exemption (Zero Overhead)
+- **Bypass Rule**: Do NOT run pruning or state ledgering on fresh, short conversations (< 20 turns or < 2,000 tokens). Proceed straight to answers without meta-management.
+
 ## 1. Context Saturation Management
-- **Trigger**: Engage when context token consumption grows heavy or conversation approaches saturation thresholds.
+- **Trigger**: Engage only when context token consumption grows heavy (> 20 turns) or thread approaches capacity.
 - **Mental State Ledger**: Discard intermediate trial-and-error steps and obsolete stack traces. ALWAYS preserve active architectural decisions, user preferences, and business constraints.
 - **Prune Dead Ends**: Once an approach is verified as incorrect, drop its reasoning trail from subsequent turns.
 

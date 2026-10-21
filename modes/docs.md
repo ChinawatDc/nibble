@@ -9,6 +9,7 @@ Specialized guidelines for processing documentation, PDFs, specifications, and d
   - Read only the document preamble / first 30 lines.
   - Inspect summary sections before requesting broader pages.
 - **Avoid Full Ingestion**: Never stream an entire manual into context when answering a targeted question. Read only the relevant section.
+- **Quality Over Cost (Cross-Doc Navigation)**: When a query spans interdependent specifications, read all relevant cross-references. Correctness always outranks token reduction.
 
 ## 2. Concise Synthesis
 - **Direct Answers**: Synthesize answers in bullet points. Do not quote verbatim paragraphs from the source material.
