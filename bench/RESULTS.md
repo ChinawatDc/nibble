@@ -37,9 +37,9 @@
 
 ---
 
-## v0.2.0 Chat Mode Verification (Sandbox Rerun)
+## v0.2.0 Chat Mode (Sandbox Rerun)
 
-Following the pilot findings, v0.2.0 introduced the Short-Thread Bypass and targeted prompt assembly. Re-testing the 5 chat tasks (`h01–h05`) on the local sandbox (`agy 1.4.3`) yielded the following verified token counts:
+Following the pilot findings, v0.2.0 introduced the Short-Thread Bypass and targeted prompt assembly. Re-testing the 5 chat tasks (`h01–h05`) on the local sandbox (`agy 1.4.3`) yielded the following token counts:
 
 | Task | Baseline (`none` med) | v0.1 (`with-skill` med) | **v0.2 (`with-skill`)** | Change vs Baseline | **Change vs v0.1** | Quality |
 |---|---:|---:|---:|---:|---:|:---:|

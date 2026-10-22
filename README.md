@@ -97,6 +97,6 @@ cp -R skills/nibble/* .agents/skills/nibble/
 | **Code Mode** (`c01–c05`) | **−44.6%** | 100% Pass (Passed cross-file traps `c02`, `c04`) | **Production Ready** |
 | **Docs Mode (General)** (`d01–d03`) | **−32.8%** | 100% Pass | **Production Ready** |
 | **Docs Mode (Cross-Doc Traps)** (`d04, d05`) | **+7.6% to +18.5%** | 100% Pass (Cost of Correctness) | **Accepted Trade-off** |
-| **Chat Mode** (`h01–h05`) | **−24.8%** | 100% Pass (v0.2 Verified: −50.9% tokens vs v0.1) | **Production Ready** |
+| **Chat Mode** (`h01–h05`) | **−24.8%** | 100% Pass (v0.2: −50.9% tokens vs v0.1) | **Production Ready** |
 
 *Formal benchmarks on the locked 18-task test suite v2 (108 runs) are conducted in an isolated sandbox environment.*
