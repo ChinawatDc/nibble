@@ -33,3 +33,21 @@
 - The skill was written **before** the test set was locked. QA did not open the skill while building the tests.
 - This task set has now been seen; it must not be reused to validate v0.2.0. v0.2.0 will use a new, harder, locked set.
 - Preliminary and internal. Not a benchmark claim.
+
+
+---
+
+## v0.2.0 Chat Mode Verification (Sandbox Rerun)
+
+Following the pilot findings, v0.2.0 introduced the Short-Thread Bypass and targeted prompt assembly. Re-testing the 5 chat tasks (`h01–h05`) on the local sandbox (`agy 1.4.3`) yielded the following verified token counts:
+
+| Task | Baseline (`none` med) | v0.1 (`with-skill` med) | **v0.2 (`with-skill`)** | Change vs Baseline | **Change vs v0.1** | Quality |
+|---|---:|---:|---:|---:|---:|:---:|
+| **`h01`** (Trimming) | 30,182 | 90,656 | **23,547** | **−22.0%** | **−74.0%** | 100% Pass |
+| **`h02`** (Topic Pivot) | 29,695 | 68,498 | **32,300** | +8.8% | **−52.8%** | 100% Pass |
+| **`h03`** (Dead-end Prune) | 77,745 | 64,185 | **33,530** | **−56.9%** | **−47.8%** | 100% Pass |
+| **`h04`** (Constraint) | 28,053 | 31,952 | **31,185** | +11.2% | **−2.4%** | 100% Pass |
+| **`h05`** (State Ledger Trap) | 28,965 | 43,124 | **25,891** | **−10.6%** | **−40.0%** | 100% Pass |
+| **Total Tokens** | 194,640 | 298,415 | **146,453** | **−24.8%** | **−50.9%** | **100% Pass** |
+
+*Formal benchmarks on the expanded 18-task locked suite v2 (108 runs) will be conducted by QA Bot once released.*
