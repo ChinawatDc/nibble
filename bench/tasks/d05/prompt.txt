@@ -1,1 +1,0 @@
-Per sla.md, a customer paying 40,000 THB/month had 94.2% availability. What service credit in THB do they receive? Cite sections.

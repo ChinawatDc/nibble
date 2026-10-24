@@ -1,9 +1,9 @@
 ---
 name: nibble
-version: v0.2.0
+version: v0.2.1
 description: Token and context optimization skill. Reads minimally, searches first, caches knowledge, and adapts via code, docs, and chat modes.
 ---
-# nibble (v0.2.0)
+# nibble (v0.2.1)
 
 Context optimization engine. Minimizes token consumption without degrading task quality.
 

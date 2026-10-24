@@ -1,1 +1,0 @@
-Running ledger.importer.load('data/ledger_2026.csv') raises ValueError on many rows. Find why and give file, line and fix.

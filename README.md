@@ -4,99 +4,93 @@
 
 Token and context optimization skill for AI coding assistants. Reads minimally, searches first, caches knowledge, and dynamically adapts across **code**, **docs**, and **chat** modes.
 
-> **Package & Repository Name:** `nibble-context`  
-> **Skill Name:** `nibble`  
-> **Current Version:** `v0.2.0`
+> **Repository:** `ChinawatDc/nibble`  
+> **Skill path:** [`skills/nibble/`](./skills/nibble/)  
+> **Current Version:** `v0.2.1`
 
 ---
 
 ## Quick Install (via skills.sh)
 
-Install directly to your AI agent with standard skills CLI:
-
 ```bash
-# Install to Claude Code
-npx skills add ChinawatDc/nibble -a claude-code
-
-# Install to Cursor
-npx skills add ChinawatDc/nibble -a cursor
-
 # Install to all supported agents (*: Claude Code, Cursor, Codex, Gemini)
 npx skills add ChinawatDc/nibble -a '*'
+
+# Or target one agent
+npx skills add ChinawatDc/nibble -a claude-code
+npx skills add ChinawatDc/nibble -a cursor
 ```
 
-*(Note: When installing from a monorepo, specify `-s nibble` or target `ChinawatDc/skill-lab`)*
+Skill sources live under `skills/nibble/` (`SKILL.md` + `modes/`). That layout matches [skills.sh](https://skills.sh) discovery.
 
 ---
 
 ## Why nibble?
 
 Large context windows frequently lead to lazy full-file reads, redundant file re-reading, and conversational token bloat. `nibble` enforces disciplined context ingestion without degrading task quality:
-1. **Search Before Opening**: Uses `grep`, symbols, and outlines instead of ingesting entire files.
-2. **Selective Rereads**: Avoids reopening unchanged files, but permits rereading when builds fail, tests break, or conflicts arise.
-3. **Windowed Reads**: Restricts file reading to targeted line ranges. Files under 150 lines are read in one shot to avoid tool-call fragmentation.
-4. **Short-Thread Bypass**: Conversations under 20 turns bypass chat pruning completely to eliminate prompt overhead.
-5. **Quality-First Safety Net**: If ambiguous, reads more—correctness always outranks token reduction.
 
----
-
-## Relationship with IDE Rules (Cursor / Claude Code)
-
-`nibble` is designed to **complement** (not fight) built-in assistant rules:
-* **Host Tool Alignment:** Leverages existing IDE tool surfaces (like Cursor's line-offset reads and ast-grep).
-* **Docs Fallback:** Provides explicit fallbacks for formats where IDE outline APIs are absent (e.g. PDF/Word).
-* **Silent by Default:** Keeps developer chat clean by suppressing visual mode tags unless `NIBBLE_DEBUG=1` or running benchmarks.
+1. **Search Before Opening** — Prefer `grep`, symbols, and outlines over full-file reads.
+2. **Selective Rereads** — Skip reopening unchanged files; reread when builds/tests fail or conflicts arise.
+3. **Windowed Reads** — Targeted line ranges; files under 150 lines may be read in one shot.
+4. **Short-Thread Bypass** — Conversations under ~20 turns skip chat pruning (no fixed overhead).
+5. **Quality Over Cost** — If ambiguous, read more; correctness outranks token savings.
 
 ---
 
 ## Dynamic Modes
 
-`nibble` automatically detects your task context and loads specialized sub-rules:
+| Mode | When | Source |
+|---|---|---|
+| **Code** | Source, bugs, stack traces | `skills/nibble/modes/code.md` |
+| **Docs** | Specs, PDFs, spreadsheets, manuals | `skills/nibble/modes/docs.md` |
+| **Chat** | Saturated threads / topic pivots | `skills/nibble/modes/chat.md` |
 
-* **Code Mode (`modes/code.md`)**: Activated on source files, repositories, bug fixes, and stack traces. Enforces surgical edits, conditional rereading, and terminal output filtering.
-* **Docs Mode (`modes/docs.md`)**: Activated on PDFs, Word docs, spreadsheets, and markdown specs. Enforces outline-first navigation, IDE fallbacks, and concise extraction.
-* **Chat Mode (`modes/chat.md`)**: Activated on saturated threads or topic switches. Discards dead-end history while maintaining an active Mental State Ledger (constraints and key decisions). Fresh/short threads bypass pruning.
+Silent by default (no `[nibble: …]` tags unless `NIBBLE_DEBUG=1` or a benchmark harness).
 
 ---
 
-## Manual Installation Guide
+## Manual Installation
 
-### 1. Claude Code
+Copy the skill package into your agent’s skills directory:
+
 ```bash
+# Claude Code
 mkdir -p .claude/skills/nibble
-cp -R skills/nibble/* .claude/skills/nibble/
-```
+cp skills/nibble/SKILL.md .claude/skills/nibble/
+cp -R skills/nibble/modes .claude/skills/nibble/
 
-### 2. Cursor
-```bash
+# Cursor
 mkdir -p .cursor/skills/nibble
-cp -R skills/nibble/* .cursor/skills/nibble/
-```
-Cursor Agent will automatically load `SKILL.md` and dynamically route to mode sub-rules.
+cp skills/nibble/SKILL.md .cursor/skills/nibble/
+cp -R skills/nibble/modes .cursor/skills/nibble/
 
-### 3. Codex
-```bash
+# Codex
 mkdir -p .codex/skills/nibble
-cp -R skills/nibble/* .codex/skills/nibble/
+cp skills/nibble/SKILL.md .codex/skills/nibble/
+cp -R skills/nibble/modes .codex/skills/nibble/
+
+# Gemini CLI / agy
+mkdir -p .agents/skills/nibble
+cp skills/nibble/SKILL.md .agents/skills/nibble/
+cp -R skills/nibble/modes .agents/skills/nibble/
 ```
 
-### 4. Gemini CLI & agy
+One-liner from repo root (replace the destination with your agent skills path):
+
 ```bash
-mkdir -p .agents/skills/nibble
-cp -R skills/nibble/* .agents/skills/nibble/
+cp -R skills/nibble .cursor/skills/nibble
 ```
 
 ---
 
-## Performance & Quality Assurance
+## Benchmarks
 
-*Note: In accordance with our QA guidelines, metrics are evaluated per mode rather than blended into a single aggregate.*
+Pilot metrics (15 tasks) are documented historically on branch [`bench/pilot-v1`](https://github.com/ChinawatDc/nibble/tree/bench/pilot-v1). The heavy `bench/` fixtures are **not** on `main`, so skills.sh and `npx skills add` stay light.
 
-| Mode | Token Reduction (Median) | Quality / Traps | Status |
-|---|---|---|---|
-| **Code Mode** (`c01–c05`) | **−44.6%** | 100% Pass (Passed cross-file traps `c02`, `c04`) | **Production Ready** |
-| **Docs Mode (General)** (`d01–d03`) | **−32.8%** | 100% Pass | **Production Ready** |
-| **Docs Mode (Cross-Doc Traps)** (`d04, d05`) | **+7.6% to +18.5%** | 100% Pass (Cost of Correctness) | **Accepted Trade-off** |
-| **Chat Mode** (`h01–h05`) | **−24.8%** | 100% Pass (v0.2: −50.9% tokens vs v0.1) | **Production Ready** |
+*Formal numbers for the locked 18-task suite are tracked separately; do not treat pilot % as a single blended marketing claim.*
 
-*Formal benchmarks on the locked 18-task test suite v2 (108 runs) are conducted in an isolated sandbox environment.*
+---
+
+## Thai summary
+
+See [README.th.md](./README.th.md).

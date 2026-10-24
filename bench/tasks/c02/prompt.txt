@@ -1,1 +1,0 @@
-Every HTTP request made through src/http/client.js aborts immediately instead of waiting about 30 seconds. Find the root cause. Name every file and line involved and give the fix.

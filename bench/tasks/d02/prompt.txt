@@ -1,1 +1,0 @@
-In spec.md, what is the rate limit and burst for the /v2/reports endpoint?
